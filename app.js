@@ -25,7 +25,7 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 8000;
 connectDB()
-  .then(
+  .then(() =>
     app.listen(port, () => {
       console.log(`Server is running. Use our API on port: ${port}`);
     })
