@@ -12,13 +12,14 @@ import validateId from "../middlewares/validateId.js";
 import {
   createContactSchema,
   updateContactSchema,
+  updateStatusContactSchema,
 } from "../schemas/contactsSchemas.js";
 
 const contactsRouter = express.Router();
 
 contactsRouter.get("/", getAllContacts);
 
-contactsRouter.get("/:id", getOneContact);
+contactsRouter.get("/:id", validateId, getOneContact);
 
 contactsRouter.delete("/:id", validateId, deleteContact);
 
@@ -33,7 +34,7 @@ contactsRouter.put(
 
 contactsRouter.patch(
   "/:id/favorite",
-  validateBody(updateContactSchema),
+  validateBody(updateStatusContactSchema),
   validateId,
   updateStatusContact
 );
