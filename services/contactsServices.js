@@ -1,8 +1,9 @@
 import Contact from "../models/contact.js";
 
-export const getContacts = () => Contact.find();
+export const getContacts = (owner, skip, limit) =>
+  Contact.find(owner, skip, limit);
 
-export const getContact = (id) => Contact.findById(id);
+export const getContact = (id, owner) => Contact.findOne(id, owner);
 
 export const removeContact = (id) => Contact.findByIdAndDelete(id);
 
