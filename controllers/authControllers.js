@@ -7,8 +7,8 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import Jimp from "jimp";
 
-const avatarsDir = path.resolve("public", "avatars");
 const { SECRET_KEY } = process.env;
+const avatarsDir = path.resolve("public", "avatars");
 
 export const register = async (req, res) => {
   const { email, password } = req.body;
