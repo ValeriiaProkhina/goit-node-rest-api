@@ -14,21 +14,32 @@ import {
   updateContactSchema,
   updateStatusContactSchema,
 } from "../schemas/contactsSchemas.js";
+import ctrlWrapper from "../helpers/ctrlWrapper.js";
 import authenticate from "../middlewares/authenticate.js";
 
 const contactsRouter = express.Router();
 
-contactsRouter.get("/", authenticate, getAllContacts);
+contactsRouter.get("/", authenticate, ctrlWrapper(getAllContacts));
 
-contactsRouter.get("/:id", authenticate, validateId, getOneContact);
+contactsRouter.get(
+  "/:id",
+  authenticate,
+  validateId,
+  ctrlWrapper(getOneContact)
+);
 
-contactsRouter.delete("/:id", authenticate, validateId, deleteContact);
+contactsRouter.delete(
+  "/:id",
+  authenticate,
+  validateId,
+  ctrlWrapper(deleteContact)
+);
 
 contactsRouter.post(
   "/",
   authenticate,
   validateBody(createContactSchema),
-  createContact
+  ctrlWrapper(createContact)
 );
 
 contactsRouter.put(
@@ -36,7 +47,7 @@ contactsRouter.put(
   authenticate,
   validateBody(updateContactSchema),
   validateId,
-  updateContact
+  ctrlWrapper(updateContact)
 );
 
 contactsRouter.patch(
@@ -44,7 +55,7 @@ contactsRouter.patch(
   authenticate,
   validateBody(updateStatusContactSchema),
   validateId,
-  updateStatusContact
+  ctrlWrapper(updateStatusContact)
 );
 
 export default contactsRouter;
